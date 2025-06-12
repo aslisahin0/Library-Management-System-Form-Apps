@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="libraryDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'libraryDB.dbo.ISLEM' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ISLEM">
+          <Key>
+            <PropertyRef Name="ogr_no" />
+            <PropertyRef Name="islem_no" />
+            <PropertyRef Name="kitap_no" />
+          </Key>
+          <Property Name="ogr_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="islem_no" Type="int" Nullable="false" />
+          <Property Name="kitap_no" Type="int" Nullable="false" />
+          <Property Name="al_tarih" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="KITAP">
+          <Key>
+            <PropertyRef Name="kitap_no" />
+          </Key>
+          <Property Name="kitap_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kitap_ad" Type="nchar" MaxLength="10" />
+          <Property Name="yazar_ad" Type="nchar" MaxLength="10" />
+          <Property Name="sayfa_no" Type="int" Nullable="false" />
+          <Property Name="yazar_no" Type="int" Nullable="false" />
+          <Property Name="tur_no" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OGRENCI">
+          <Key>
+            <PropertyRef Name="ogr_no" />
+          </Key>
+          <Property Name="ogr_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ogr_ad" Type="nvarchar" MaxLength="50" />
+          <Property Name="ogr_soyad" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TUR">
+          <Key>
+            <PropertyRef Name="tur_no" />
+          </Key>
+          <Property Name="tur_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tur_ad" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="YAZAR">
+          <Key>
+            <PropertyRef Name="yazar_no" />
+          </Key>
+          <Property Name="yazar_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="yazar_ad" Type="nvarchar" MaxLength="50" />
+          <Property Name="yazar_soyad" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="libraryDBModelStoreContainer">
+          <EntitySet Name="KITAP" EntityType="Self.KITAP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OGRENCI" EntityType="Self.OGRENCI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TUR" EntityType="Self.TUR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="YAZAR" EntityType="Self.YAZAR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ISLEM" EntityType="Self.ISLEM" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ISLEM].[ogr_no] AS [ogr_no], 
+    [ISLEM].[islem_no] AS [islem_no], 
+    [ISLEM].[kitap_no] AS [kitap_no], 
+    [ISLEM].[al_tarih] AS [al_tarih]
+    FROM [dbo].[ISLEM] AS [ISLEM]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="libraryDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="libraryDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="KITAP" EntityType="libraryDBModel.KITAP" />
+          <EntitySet Name="OGRENCI" EntityType="libraryDBModel.OGRENCI" />
+          <EntitySet Name="TUR" EntityType="libraryDBModel.TUR" />
+          <EntitySet Name="YAZAR" EntityType="libraryDBModel.YAZAR" />
+          <EntitySet Name="ISLEM" EntityType="libraryDBModel.ISLEM" />
+        </EntityContainer>
+        <EntityType Name="KITAP">
+          <Key>
+            <PropertyRef Name="kitap_no" />
+          </Key>
+          <Property Name="kitap_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kitap_ad" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="yazar_ad" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="sayfa_no" Type="Int32" Nullable="false" />
+          <Property Name="yazar_no" Type="Int32" Nullable="false" />
+          <Property Name="tur_no" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OGRENCI">
+          <Key>
+            <PropertyRef Name="ogr_no" />
+          </Key>
+          <Property Name="ogr_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ogr_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ogr_soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TUR">
+          <Key>
+            <PropertyRef Name="tur_no" />
+          </Key>
+          <Property Name="tur_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tur_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="YAZAR">
+          <Key>
+            <PropertyRef Name="yazar_no" />
+          </Key>
+          <Property Name="yazar_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="yazar_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="yazar_soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ISLEM">
+          <Key>
+            <PropertyRef Name="ogr_no" />
+            <PropertyRef Name="islem_no" />
+            <PropertyRef Name="kitap_no" />
+          </Key>
+          <Property Name="ogr_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="islem_no" Type="Int32" Nullable="false" />
+          <Property Name="kitap_no" Type="Int32" Nullable="false" />
+          <Property Name="al_tarih" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="libraryDBModelStoreContainer" CdmEntityContainer="libraryDBEntities">
+          <EntitySetMapping Name="KITAP">
+            <EntityTypeMapping TypeName="libraryDBModel.KITAP">
+              <MappingFragment StoreEntitySet="KITAP">
+                <ScalarProperty Name="tur_no" ColumnName="tur_no" />
+                <ScalarProperty Name="yazar_no" ColumnName="yazar_no" />
+                <ScalarProperty Name="sayfa_no" ColumnName="sayfa_no" />
+                <ScalarProperty Name="yazar_ad" ColumnName="yazar_ad" />
+                <ScalarProperty Name="kitap_ad" ColumnName="kitap_ad" />
+                <ScalarProperty Name="kitap_no" ColumnName="kitap_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OGRENCI">
+            <EntityTypeMapping TypeName="libraryDBModel.OGRENCI">
+              <MappingFragment StoreEntitySet="OGRENCI">
+                <ScalarProperty Name="ogr_soyad" ColumnName="ogr_soyad" />
+                <ScalarProperty Name="ogr_ad" ColumnName="ogr_ad" />
+                <ScalarProperty Name="ogr_no" ColumnName="ogr_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TUR">
+            <EntityTypeMapping TypeName="libraryDBModel.TUR">
+              <MappingFragment StoreEntitySet="TUR">
+                <ScalarProperty Name="tur_ad" ColumnName="tur_ad" />
+                <ScalarProperty Name="tur_no" ColumnName="tur_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="YAZAR">
+            <EntityTypeMapping TypeName="libraryDBModel.YAZAR">
+              <MappingFragment StoreEntitySet="YAZAR">
+                <ScalarProperty Name="yazar_soyad" ColumnName="yazar_soyad" />
+                <ScalarProperty Name="yazar_ad" ColumnName="yazar_ad" />
+                <ScalarProperty Name="yazar_no" ColumnName="yazar_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ISLEM">
+            <EntityTypeMapping TypeName="libraryDBModel.ISLEM">
+              <MappingFragment StoreEntitySet="ISLEM">
+                <ScalarProperty Name="al_tarih" ColumnName="al_tarih" />
+                <ScalarProperty Name="kitap_no" ColumnName="kitap_no" />
+                <ScalarProperty Name="islem_no" ColumnName="islem_no" />
+                <ScalarProperty Name="ogr_no" ColumnName="ogr_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

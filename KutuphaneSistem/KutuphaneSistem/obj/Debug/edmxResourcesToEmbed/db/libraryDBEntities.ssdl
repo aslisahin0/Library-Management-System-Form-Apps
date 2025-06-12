@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="libraryDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'libraryDB.dbo.ISLEM' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ISLEM">
+    <Key>
+      <PropertyRef Name="ogr_no" />
+      <PropertyRef Name="islem_no" />
+      <PropertyRef Name="kitap_no" />
+    </Key>
+    <Property Name="ogr_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="islem_no" Type="int" Nullable="false" />
+    <Property Name="kitap_no" Type="int" Nullable="false" />
+    <Property Name="al_tarih" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="KITAP">
+    <Key>
+      <PropertyRef Name="kitap_no" />
+    </Key>
+    <Property Name="kitap_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="kitap_ad" Type="nchar" MaxLength="10" />
+    <Property Name="yazar_ad" Type="nchar" MaxLength="10" />
+    <Property Name="sayfa_no" Type="int" Nullable="false" />
+    <Property Name="yazar_no" Type="int" Nullable="false" />
+    <Property Name="tur_no" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OGRENCI">
+    <Key>
+      <PropertyRef Name="ogr_no" />
+    </Key>
+    <Property Name="ogr_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ogr_ad" Type="nvarchar" MaxLength="50" />
+    <Property Name="ogr_soyad" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TUR">
+    <Key>
+      <PropertyRef Name="tur_no" />
+    </Key>
+    <Property Name="tur_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tur_ad" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="YAZAR">
+    <Key>
+      <PropertyRef Name="yazar_no" />
+    </Key>
+    <Property Name="yazar_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="yazar_ad" Type="nvarchar" MaxLength="50" />
+    <Property Name="yazar_soyad" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityContainer Name="libraryDBModelStoreContainer">
+    <EntitySet Name="KITAP" EntityType="Self.KITAP" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OGRENCI" EntityType="Self.OGRENCI" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TUR" EntityType="Self.TUR" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="YAZAR" EntityType="Self.YAZAR" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ISLEM" EntityType="Self.ISLEM" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ISLEM].[ogr_no] AS [ogr_no], 
+    [ISLEM].[islem_no] AS [islem_no], 
+    [ISLEM].[kitap_no] AS [kitap_no], 
+    [ISLEM].[al_tarih] AS [al_tarih]
+    FROM [dbo].[ISLEM] AS [ISLEM]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

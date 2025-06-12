@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="libraryDBModelStoreContainer" CdmEntityContainer="libraryDBEntities">
+    <EntitySetMapping Name="KITAP">
+      <EntityTypeMapping TypeName="libraryDBModel.KITAP">
+        <MappingFragment StoreEntitySet="KITAP">
+          <ScalarProperty Name="tur_no" ColumnName="tur_no" />
+          <ScalarProperty Name="yazar_no" ColumnName="yazar_no" />
+          <ScalarProperty Name="sayfa_no" ColumnName="sayfa_no" />
+          <ScalarProperty Name="yazar_ad" ColumnName="yazar_ad" />
+          <ScalarProperty Name="kitap_ad" ColumnName="kitap_ad" />
+          <ScalarProperty Name="kitap_no" ColumnName="kitap_no" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OGRENCI">
+      <EntityTypeMapping TypeName="libraryDBModel.OGRENCI">
+        <MappingFragment StoreEntitySet="OGRENCI">
+          <ScalarProperty Name="ogr_soyad" ColumnName="ogr_soyad" />
+          <ScalarProperty Name="ogr_ad" ColumnName="ogr_ad" />
+          <ScalarProperty Name="ogr_no" ColumnName="ogr_no" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TUR">
+      <EntityTypeMapping TypeName="libraryDBModel.TUR">
+        <MappingFragment StoreEntitySet="TUR">
+          <ScalarProperty Name="tur_ad" ColumnName="tur_ad" />
+          <ScalarProperty Name="tur_no" ColumnName="tur_no" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="YAZAR">
+      <EntityTypeMapping TypeName="libraryDBModel.YAZAR">
+        <MappingFragment StoreEntitySet="YAZAR">
+          <ScalarProperty Name="yazar_soyad" ColumnName="yazar_soyad" />
+          <ScalarProperty Name="yazar_ad" ColumnName="yazar_ad" />
+          <ScalarProperty Name="yazar_no" ColumnName="yazar_no" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ISLEM">
+      <EntityTypeMapping TypeName="libraryDBModel.ISLEM">
+        <MappingFragment StoreEntitySet="ISLEM">
+          <ScalarProperty Name="al_tarih" ColumnName="al_tarih" />
+          <ScalarProperty Name="kitap_no" ColumnName="kitap_no" />
+          <ScalarProperty Name="islem_no" ColumnName="islem_no" />
+          <ScalarProperty Name="ogr_no" ColumnName="ogr_no" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

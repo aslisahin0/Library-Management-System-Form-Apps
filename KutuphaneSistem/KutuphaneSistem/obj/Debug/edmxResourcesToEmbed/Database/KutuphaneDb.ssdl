@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="kutuphaneDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'kutuphaneDB.dbo.ISLEM' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ISLEM">
+    <Key>
+      <PropertyRef Name="ogr_no" />
+      <PropertyRef Name="islem_no" />
+      <PropertyRef Name="kitap_no" />
+    </Key>
+    <Property Name="ogr_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="islem_no" Type="int" Nullable="false" />
+    <Property Name="kitap_no" Type="int" Nullable="false" />
+    <Property Name="ver_tarih" Type="nchar" MaxLength="10" />
+    <Property Name="al_tarih" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="KITAP">
+    <Key>
+      <PropertyRef Name="kitap_no" />
+    </Key>
+    <Property Name="kitap_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="kitap_ad" Type="varchar" MaxLength="50" />
+    <Property Name="yazar_ad" Type="varchar" MaxLength="50" />
+    <Property Name="sayfa_no" Type="int" Nullable="false" />
+    <Property Name="yazar_no" Type="int" Nullable="false" />
+    <Property Name="tur_no" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OGRENCİ">
+    <Key>
+      <PropertyRef Name="ogr_no" />
+    </Key>
+    <Property Name="ogr_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ogr_ad" Type="varchar" MaxLength="50" />
+    <Property Name="ogr_soyad" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TUR">
+    <Key>
+      <PropertyRef Name="tur_no" />
+    </Key>
+    <Property Name="tur_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tur_ad" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="YAZAR">
+    <Key>
+      <PropertyRef Name="yazar_no" />
+    </Key>
+    <Property Name="yazar_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="yazar_ad" Type="varchar" MaxLength="50" />
+    <Property Name="yazar_soyad" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_İSLEM_KİTAP">
+    <End Role="KITAP" Type="Self.KITAP" Multiplicity="1" />
+    <End Role="ISLEM" Type="Self.ISLEM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KITAP">
+        <PropertyRef Name="kitap_no" />
+      </Principal>
+      <Dependent Role="ISLEM">
+        <PropertyRef Name="kitap_no" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_İSLEM_OGRENCİ">
+    <End Role="OGRENCİ" Type="Self.OGRENCİ" Multiplicity="1" />
+    <End Role="ISLEM" Type="Self.ISLEM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OGRENCİ">
+        <PropertyRef Name="ogr_no" />
+      </Principal>
+      <Dependent Role="ISLEM">
+        <PropertyRef Name="ogr_no" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KİTAP_TÜR">
+    <End Role="TUR" Type="Self.TUR" Multiplicity="1" />
+    <End Role="KITAP" Type="Self.KITAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TUR">
+        <PropertyRef Name="tur_no" />
+      </Principal>
+      <Dependent Role="KITAP">
+        <PropertyRef Name="tur_no" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KİTAP_YAZAR">
+    <End Role="YAZAR" Type="Self.YAZAR" Multiplicity="1" />
+    <End Role="KITAP" Type="Self.KITAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="YAZAR">
+        <PropertyRef Name="yazar_no" />
+      </Principal>
+      <Dependent Role="KITAP">
+        <PropertyRef Name="yazar_no" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="kutuphaneDBModelStoreContainer">
+    <EntitySet Name="KITAP" EntityType="Self.KITAP" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OGRENCİ" EntityType="Self.OGRENCİ" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TUR" EntityType="Self.TUR" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="YAZAR" EntityType="Self.YAZAR" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ISLEM" EntityType="Self.ISLEM" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ISLEM].[ogr_no] AS [ogr_no], 
+    [ISLEM].[islem_no] AS [islem_no], 
+    [ISLEM].[kitap_no] AS [kitap_no], 
+    [ISLEM].[ver_tarih] AS [ver_tarih], 
+    [ISLEM].[al_tarih] AS [al_tarih]
+    FROM [dbo].[ISLEM] AS [ISLEM]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_İSLEM_KİTAP" Association="Self.FK_İSLEM_KİTAP">
+      <End Role="KITAP" EntitySet="KITAP" />
+      <End Role="ISLEM" EntitySet="ISLEM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_İSLEM_OGRENCİ" Association="Self.FK_İSLEM_OGRENCİ">
+      <End Role="OGRENCİ" EntitySet="OGRENCİ" />
+      <End Role="ISLEM" EntitySet="ISLEM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KİTAP_TÜR" Association="Self.FK_KİTAP_TÜR">
+      <End Role="TUR" EntitySet="TUR" />
+      <End Role="KITAP" EntitySet="KITAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KİTAP_YAZAR" Association="Self.FK_KİTAP_YAZAR">
+      <End Role="YAZAR" EntitySet="YAZAR" />
+      <End Role="KITAP" EntitySet="KITAP" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

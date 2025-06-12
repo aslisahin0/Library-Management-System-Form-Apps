@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="kutuphaneDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="kutuphaneDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="KITAP" EntityType="kutuphaneDBModel.KITAP" />
+    <EntitySet Name="OGRENCİ" EntityType="kutuphaneDBModel.OGRENCİ" />
+    <EntitySet Name="sysdiagrams" EntityType="kutuphaneDBModel.sysdiagrams" />
+    <EntitySet Name="TUR" EntityType="kutuphaneDBModel.TUR" />
+    <EntitySet Name="YAZAR" EntityType="kutuphaneDBModel.YAZAR" />
+    <EntitySet Name="ISLEM" EntityType="kutuphaneDBModel.ISLEM" />
+    <AssociationSet Name="FK_İSLEM_KİTAP" Association="kutuphaneDBModel.FK_İSLEM_KİTAP">
+      <End Role="KITAP" EntitySet="KITAP" />
+      <End Role="ISLEM" EntitySet="ISLEM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KİTAP_TÜR" Association="kutuphaneDBModel.FK_KİTAP_TÜR">
+      <End Role="TUR" EntitySet="TUR" />
+      <End Role="KITAP" EntitySet="KITAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KİTAP_YAZAR" Association="kutuphaneDBModel.FK_KİTAP_YAZAR">
+      <End Role="YAZAR" EntitySet="YAZAR" />
+      <End Role="KITAP" EntitySet="KITAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_İSLEM_OGRENCİ" Association="kutuphaneDBModel.FK_İSLEM_OGRENCİ">
+      <End Role="OGRENCİ" EntitySet="OGRENCİ" />
+      <End Role="ISLEM" EntitySet="ISLEM" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="KITAP">
+    <Key>
+      <PropertyRef Name="kitap_no" />
+    </Key>
+    <Property Name="kitap_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="kitap_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="yazar_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="sayfa_no" Type="Int32" Nullable="false" />
+    <Property Name="yazar_no" Type="Int32" Nullable="false" />
+    <Property Name="tur_no" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ISLEM" Relationship="kutuphaneDBModel.FK_İSLEM_KİTAP" FromRole="KITAP" ToRole="ISLEM" />
+    <NavigationProperty Name="TUR" Relationship="kutuphaneDBModel.FK_KİTAP_TÜR" FromRole="KITAP" ToRole="TUR" />
+    <NavigationProperty Name="YAZAR" Relationship="kutuphaneDBModel.FK_KİTAP_YAZAR" FromRole="KITAP" ToRole="YAZAR" />
+  </EntityType>
+  <EntityType Name="OGRENCİ">
+    <Key>
+      <PropertyRef Name="ogr_no" />
+    </Key>
+    <Property Name="ogr_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ogr_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ogr_soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ISLEM" Relationship="kutuphaneDBModel.FK_İSLEM_OGRENCİ" FromRole="OGRENCİ" ToRole="ISLEM" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TUR">
+    <Key>
+      <PropertyRef Name="tur_no" />
+    </Key>
+    <Property Name="tur_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tur_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="KITAP" Relationship="kutuphaneDBModel.FK_KİTAP_TÜR" FromRole="TUR" ToRole="KITAP" />
+  </EntityType>
+  <EntityType Name="YAZAR">
+    <Key>
+      <PropertyRef Name="yazar_no" />
+    </Key>
+    <Property Name="yazar_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="yazar_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="yazar_soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="KITAP" Relationship="kutuphaneDBModel.FK_KİTAP_YAZAR" FromRole="YAZAR" ToRole="KITAP" />
+  </EntityType>
+  <EntityType Name="ISLEM">
+    <Key>
+      <PropertyRef Name="ogr_no" />
+      <PropertyRef Name="islem_no" />
+      <PropertyRef Name="kitap_no" />
+    </Key>
+    <Property Name="ogr_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="islem_no" Type="Int32" Nullable="false" />
+    <Property Name="kitap_no" Type="Int32" Nullable="false" />
+    <Property Name="ver_tarih" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="al_tarih" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="KITAP" Relationship="kutuphaneDBModel.FK_İSLEM_KİTAP" FromRole="ISLEM" ToRole="KITAP" />
+    <NavigationProperty Name="OGRENCİ" Relationship="kutuphaneDBModel.FK_İSLEM_OGRENCİ" FromRole="ISLEM" ToRole="OGRENCİ" />
+  </EntityType>
+  <Association Name="FK_İSLEM_KİTAP">
+    <End Type="kutuphaneDBModel.KITAP" Role="KITAP" Multiplicity="1" />
+    <End Type="kutuphaneDBModel.ISLEM" Role="ISLEM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KITAP">
+        <PropertyRef Name="kitap_no" />
+      </Principal>
+      <Dependent Role="ISLEM">
+        <PropertyRef Name="kitap_no" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KİTAP_TÜR">
+    <End Type="kutuphaneDBModel.TUR" Role="TUR" Multiplicity="1" />
+    <End Type="kutuphaneDBModel.KITAP" Role="KITAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TUR">
+        <PropertyRef Name="tur_no" />
+      </Principal>
+      <Dependent Role="KITAP">
+        <PropertyRef Name="tur_no" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KİTAP_YAZAR">
+    <End Type="kutuphaneDBModel.YAZAR" Role="YAZAR" Multiplicity="1" />
+    <End Type="kutuphaneDBModel.KITAP" Role="KITAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="YAZAR">
+        <PropertyRef Name="yazar_no" />
+      </Principal>
+      <Dependent Role="KITAP">
+        <PropertyRef Name="yazar_no" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_İSLEM_OGRENCİ">
+    <End Type="kutuphaneDBModel.OGRENCİ" Role="OGRENCİ" Multiplicity="1" />
+    <End Type="kutuphaneDBModel.ISLEM" Role="ISLEM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OGRENCİ">
+        <PropertyRef Name="ogr_no" />
+      </Principal>
+      <Dependent Role="ISLEM">
+        <PropertyRef Name="ogr_no" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
